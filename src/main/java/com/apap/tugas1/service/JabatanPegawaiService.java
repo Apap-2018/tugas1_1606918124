@@ -1,8 +1,11 @@
 package com.apap.tugas1.service;
 
-import com.apap.tugas1.model.JabatanModel;
-import com.apap.tugas1.model.PegawaiModel;
+import java.util.List;
+
+import com.apap.tugas1.model.JabatanPegawaiModel;
 
 public interface JabatanPegawaiService {
-	JabatanModel getJabatanByPegawai(PegawaiModel pegawai);
+	List<JabatanPegawaiModel> getJabatanByPegawaiId(long id);
+	long sizeJabatanPegawai();
+	JabatanPegawaiModel checkWho(long id);
 }

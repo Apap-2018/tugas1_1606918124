@@ -22,17 +22,13 @@ public class JabatanPegawaiModel implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_pegawai", referencedColumnName = "id", nullable = false)
-	@OnDelete(action = OnDeleteAction.NO_ACTION)
-	@JsonIgnore
-	private PegawaiModel pegawai;
-	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_jabatan", referencedColumnName = "id", nullable = false)
-	@OnDelete(action = OnDeleteAction.NO_ACTION)
-	@JsonIgnore
-	private JabatanModel jabatan;
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+	
 }

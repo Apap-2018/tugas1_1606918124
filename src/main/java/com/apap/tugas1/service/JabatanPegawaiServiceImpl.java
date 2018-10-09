@@ -1,18 +1,29 @@
 package com.apap.tugas1.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.apap.tugas1.model.JabatanModel;
-import com.apap.tugas1.model.PegawaiModel;
+import com.apap.tugas1.model.JabatanPegawaiModel;
 import com.apap.tugas1.repository.JabatanPegawaiDB;
 
 public class JabatanPegawaiServiceImpl implements JabatanPegawaiService {
 	@Autowired
 	private JabatanPegawaiDB jabatanPegawaiDB;
-	
+
 	@Override
-	public JabatanModel getJabatanByPegawai(PegawaiModel pegawai) {
+	public List<JabatanPegawaiModel> getJabatanByPegawaiId(long id) {
 		return null;
+	}
+
+	@Override
+	public long sizeJabatanPegawai() {
+		return jabatanPegawaiDB.count();
+	}
+
+	@Override
+	public JabatanPegawaiModel checkWho(long id) {
+		return jabatanPegawaiDB.getOne(id);
 	}
 
 }

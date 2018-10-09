@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.apap.tugas1.model.JabatanPegawaiModel;
+import com.apap.tugas1.model.JabatanModel;
 import com.apap.tugas1.model.PegawaiModel;
 import com.apap.tugas1.service.JabatanPegawaiService;
 import com.apap.tugas1.service.PegawaiService;
@@ -32,10 +32,19 @@ public class PegawaiController {
 		else {
 			System.out.println(pegawai.getNama());
 			System.out.println(pegawai.getNip());
+			System.out.println(pegawai.getId());
+			for (JabatanModel jabatan:pegawai.getJabatanList()) {
+				System.out.println(jabatan.getNama());
+			}
 		}
-		JabatanPegawaiModel jabatanPegawai = 
-		model.addAttribute("pegawai", pegawai);
-		return "view-pegawai";
-		//return "index";
+		//if (jabatanPegawaiService.checkWho(pegawai.getId()) == null) {
+			//System.out.println("null");
+		//}
+		//System.out.println(jabatanPegawaiService.sizeJabatanPegawai());
+		//System.out.println(jabatanPegawai.getJabatan().getNama());
+		//model.addAttribute("pegawai", pegawai);
+		//model.addAttribute("jabatanPegawai", jabatanPegawai);
+		//return "view-pegawai";
+		return "index";
 	}	
 }
