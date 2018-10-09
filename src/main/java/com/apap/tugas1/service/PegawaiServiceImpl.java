@@ -18,14 +18,14 @@ public class PegawaiServiceImpl implements PegawaiService {
 		return pegawaiDB.findByNip(nip);
 	}
 
-	@Override
-	public long countEntity() {
-		return pegawaiDB.count();
-	}
+	//@Override
+	//public long countEntity() {
+		//return pegawaiDB.count();
+	//}
 
-	@Override
-	public PegawaiModel getPegawaiDetailById(Long id) {
-		return pegawaiDB.getOne(id);
-	}
+	//@Override
+	//public PegawaiModel getPegawaiDetailById(Long id) {
+		//return pegawaiDB.getOne(id);
+	//}
 	
 }

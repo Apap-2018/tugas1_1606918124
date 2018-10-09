@@ -34,7 +34,5 @@ public class JabatanPegawaiModel implements Serializable {
 	@OnDelete(action = OnDeleteAction.NO_ACTION)
 	@JsonIgnore
 	private JabatanModel jabatan;
-	
-	
 
 }
