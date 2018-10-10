@@ -36,6 +36,7 @@ public class PegawaiController {
 			for (JabatanModel jabatan:pegawai.getJabatanList()) {
 				System.out.println(jabatan.getNama());
 			}
+			System.out.println(pegawaiService.getGajiLengkapByNip(nip));
 		}
 		//if (jabatanPegawaiService.checkWho(pegawai.getId()) == null) {
 			//System.out.println("null");

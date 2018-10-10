@@ -6,4 +6,5 @@ public interface PegawaiService {
 	PegawaiModel getPegawaiDetailByNip(String nip);
 	//long countEntity();
 	//PegawaiModel getPegawaiDetailById(Long id);
+	double getGajiLengkapByNip(String nip);
 }
