@@ -24,8 +24,7 @@
 		Provinsi: <br>
 		
 		<select name="location" id="location">
-			<option disabled="disabled" selected="selected" > -- Pilih Provinsi --
-      		</option>
+			<option disabled="disabled" selected="selected" >-- Pilih Provinsi --</option>
 			<option th:each="provinsi : ${listProvinsi}" 
 					th:value="${provinsi.id}"
 					th:text="${provinsi.nama}"></option>
@@ -37,7 +36,7 @@
 			th:value="${instansi}" 
 			name="instansi"
 			id="instansi" required="required">
-			<option disabled="disabled" selected="selected"> -- Pilih Instansi --</option>
+			<option disabled="disabled" selected="selected">-- Pilih Instansi --</option>
 		</select>
 		<br>
 		
@@ -51,10 +50,10 @@
 	                provinsiId : $(this).val(),
 	                ajax : 'true'
 	            }, function(data) {
-	                var html = '<option value="">-- Pilih Instansi --</option>';
+	                var html = '<option disabled="disabled" selected="selected">-- Pilih Instansi --</option>';
 	                var len = data.length;
 	                for ( var i = 0; i < len; i++) {
-	                    html += '<option value="' + data[i].nama + '">'
+	                    html += '<option th:value=${instansi.id} th:text="' + data[i].nama + '">'
 	                            + data[i].nama + '</option>';
 	                }
 	                html += '</option>';
