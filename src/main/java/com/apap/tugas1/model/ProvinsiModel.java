@@ -32,7 +32,15 @@ public class ProvinsiModel implements Serializable {
 	private double presentaseTunjangan;
 	
 	@OneToMany(mappedBy = "provinsi", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<InstansiModel> instansiProvinsi;
+	private List<InstansiModel> instansiList;
+
+	public List<InstansiModel> getInstansiList() {
+		return instansiList;
+	}
+
+	public void setInstansiList(List<InstansiModel> instansiList) {
+		this.instansiList = instansiList;
+	}
 
 	public long getId() {
 		return id;
