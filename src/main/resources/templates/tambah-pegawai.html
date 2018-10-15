@@ -23,7 +23,7 @@
 		<br>
 		Provinsi: <br>
 		
-		<select name="location" id="location">
+		<select id="location">
 			<option disabled="disabled" selected="selected" >-- Pilih Provinsi --</option>
 			<option th:each="provinsi : ${listProvinsi}" 
 					th:value="${provinsi.id}"
@@ -32,9 +32,7 @@
 		<br>
 		
  		Instansi: <br>
-		<select
-			th:value="${instansi}" 
-			name="instansi"
+		<select 
 			id="instansi" required="required">
 			<option disabled="disabled" selected="selected">-- Pilih Instansi --</option>
 		</select>
@@ -52,8 +50,8 @@
 	            }, function(data) {
 	                var html = '<option disabled="disabled" selected="selected">-- Pilih Instansi --</option>';
 	                var len = data.length;
-	                for ( var i = 0; i < len; i++) {
-	                    html += '<option th:value=${instansi.id} th:text="' + data[i].nama + '">'
+	                for (var i = 0; i < len; i++) {
+	                    html += '<option name="instansi" th:value="{instansi} th:text="' + data[i].nama + '">'
 	                            + data[i].nama + '</option>';
 	                }
 	                html += '</option>';

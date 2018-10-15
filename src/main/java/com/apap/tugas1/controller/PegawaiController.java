@@ -68,15 +68,19 @@ public class PegawaiController {
 	private String addPegawai(Model model) {
 		model.addAttribute("listProvinsi", provinsiService.getProvinsiList());
 		model.addAttribute("pegawai", new PegawaiModel());
-		model.addAttribute("instansi", new InstansiModel());
+		//model.addAttribute("instansi", new InstansiModel());
 		
 		return "tambah-pegawai";
 	}
 	
 	@RequestMapping(value = "/pegawai/tambah", method = RequestMethod.POST)
-	private String addPilotSubmit(@ModelAttribute PegawaiModel pegawai) {
+	private String addPegwawaiSubmit(@ModelAttribute PegawaiModel pegawai) {
+		System.out.println("");
 		System.out.println(pegawai.getNama());
-		return "tambah-pegawai";
+		System.out.println(pegawai.getInstansi()); //Error Masih Null
+		//System.out.println(pegawai.getInstansi().getNama());
+		//System.out.println(pegawai.getInstansi().getProvinsi().getNama());
+		return "index";
 	}
 	
 	@RequestMapping(value = "/pegawai/tambah/instansi", method = RequestMethod.GET)
