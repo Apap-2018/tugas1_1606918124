@@ -24,10 +24,12 @@ public class PegawaiController {
 	@Autowired
 	private ProvinsiService provinsiService;
 	
-	@Autowired JabatanService jabatanService;
+	@Autowired 
+	private JabatanService jabatanService;
 
 	@RequestMapping("/")
-	private String index() {
+	private String index(Model model) {
+		model.addAttribute("listJabatan",jabatanService.findAllJabatan());
 		return "index";
 	}
 
