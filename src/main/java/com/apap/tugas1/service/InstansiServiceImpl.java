@@ -31,4 +31,9 @@ public class InstansiServiceImpl implements InstansiService {
 		return listInstansiBersih;
 	}
 
+	@Override
+	public InstansiModel getInstansiById(long id) {
+		return InstansiDB.findById(id);
+	}
+
 }

@@ -20,10 +20,12 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "instansi")
+@JsonAutoDetect
 public class InstansiModel implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

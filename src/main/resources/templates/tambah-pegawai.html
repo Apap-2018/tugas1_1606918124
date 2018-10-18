@@ -4,10 +4,13 @@
 <head>
 	<title>Tambah Pegawai</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 
 <body>
-	<h3>Tambah Pegawai</h3>
+	<nav th:replace="fragments/fragment :: navbar"></nav>
+	<br>
 	<form th:action="@{/pegawai/tambah}" th:object="${pegawai}" method="POST">
 		Nama: <br>
 		<input type="text" name="nama" />
@@ -19,11 +22,11 @@
 		<input type="date" name="tanggalLahir" />
 		<br>
 		Tahun Masuk: <br>
-		<input type="text" name="tempatLahir" /> 	
+		<input type="text" name="tahunMasuk" /> 	
 		<br>
 		Provinsi: <br>
 		
-		<select id="location">
+		<select id="provinsi" name="provinsi">
 			<option disabled="disabled" selected="selected" >-- Pilih Provinsi --</option>
 			<option th:each="provinsi : ${listProvinsi}" 
 					th:value="${provinsi.id}"
@@ -32,32 +35,65 @@
 		<br>
 		
  		Instansi: <br>
+		
 		<select 
-			id="instansi" required="required">
+			id="instansi" 
+			name="instansi" 
+			th:value="${instansi}"
+			required="required">
 			<option disabled="disabled" selected="selected">-- Pilih Instansi --</option>
 		</select>
 		<br>
 		
+		Jabatan: <br>
+
+		<table>
+			<tr th:each="jabatan,iterationStatus : ${listJabatan}">
+				<td th:text="${iterationStatus.count}"></td>
+				<td th:text="${jabatan.nama}"></td>
+				<td><input type="checkbox" th:field="*{jabatanList}"
+					th:value="${jabatan.id}" /> <label
+					th:for="${#ids.prev('jabatanList')}">Hapus</label></td>
+			</tr>
+		</table>
+
+
+
 		<button type="submit">Submit</button>
 	</form>
 	
+	
 	<script>
-	$('#location').change(
+		 $('#provinsi').change(
 	        function() {
-	            $.getJSON("http://localhost:8080/pegawai/tambah/instansi", {
+	        	
+	            $.getJSON("http://localhost:8080/provinsi-get", {
 	                provinsiId : $(this).val(),
 	                ajax : 'true'
 	            }, function(data) {
 	                var html = '<option disabled="disabled" selected="selected">-- Pilih Instansi --</option>';
 	                var len = data.length;
 	                for (var i = 0; i < len; i++) {
-	                    html += '<option name="instansi" th:value="{instansi} th:text="' + data[i].nama + '">'
-	                            + data[i].nama + '</option>';
+	                    html += 
+	                    	'<option value= "'+ data[i].id +'" th:text="'+ data[i].nama +'">' + data[i].nama + '</option>';
 	                }
-	                html += '</option>';
 	                $('#instansi').html(html);
-	            });
-	        });
+	         });
+           });
+		 
+		 $('#instansi').change(
+			function(){				
+				
+				$.getJSON("http://localhost:8080/instansi-get", {
+	                instansiId : $(this).val(),
+	                ajax : 'true'
+	            },
+	            function(data) {
+	                this.value = data;
+	       	});
+
+		});		 	
+		
 	</script>
 </body>	
 
