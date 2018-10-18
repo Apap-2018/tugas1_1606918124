@@ -2,19 +2,27 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<title>View Pegawai</title>
+		<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+		<object th:include="fragments/fragment :: js" th:remove="tag"></object>
 	</head>
 	<body>
+		<nav th:replace="fragments/fragment :: navbar"></nav>
+		<br>
 		<h2 th:text="'Lihat Data Pegawai - ' + ${pegawai.nip}"></h2>
-		<h3 th:text="'NIP : ' + ${pegawai.nip}"></h3>
-		<h3 th:text="'Nama : ' + ${pegawai.nama}"></h3>
-		<h3 th:text="'Tempat Lahir : ' + ${pegawai.tempatLahir}"></h3>
-		<h3 th:text="'Tanggal Lahir : ' + ${pegawai.tanggalLahir}"></h3>
-		<h3 th:text="'Tahun Masuk : ' + ${pegawai.tahunMasuk}"></h3>
-		<h3 th:text="'Nama Instansi : ' + ${pegawai.instansi.nama} + ' - ' + ${pegawai.instansi.provinsi.nama}"></h3>
-		<h3 th:text="'Jabatan : '"></h3>
+		<h4 th:text="'NIP : ' + ${pegawai.nip}"></h4>
+		<h4 th:text="'Nama : ' + ${pegawai.nama}"></h4>
+		<h4 th:text="'Tempat Lahir : ' + ${pegawai.tempatLahir}"></h4>
+		<h4 th:text="'Tanggal Lahir : ' + ${pegawai.tanggalLahir}"></h4>
+		<h4 th:text="'Tahun Masuk : ' + ${pegawai.tahunMasuk}"></h4>
+		<h4 th:text="'Nama Instansi : ' + ${pegawai.instansi.nama} + ' - ' + ${pegawai.instansi.provinsi.nama}"></h4>
+		<h4 th:text="'Jabatan : '"></h4>
 		<div th:each="jabatan : ${jabatanList}">
-			<h3 th:text="'- ' + ${jabatan.nama}"></h3>
+			<h4 th:text="'- ' + ${jabatan.nama}"></h4>
 		</div>
-		<h3 th:text="'Gaji : Rp' + ${gajiLengkap}"></h3>
+		<h4 th:text="'Gaji : Rp' + ${gajiLengkap}"></h4>
+		<form th:action="@{/pegawai/ubah}" method="GET">
+			<input type="hidden" th:field="*{pegawai.nip}"></input>
+			<button type="submit" class="btn btn-primary">Ubah</button>
+		</form>
 	</body>
 </html>

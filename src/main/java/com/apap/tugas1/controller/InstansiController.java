@@ -22,4 +22,12 @@ public class InstansiController {
 	    //System.out.println(instansi.getNama());
 	    return instansi;
 	}
+	
+	@RequestMapping(value = "/instansi-get-ubah", method = RequestMethod.GET)
+	public @ResponseBody InstansiModel getInstansiById(@RequestParam(value = "instansiId", required = true) String instansiId) {
+		String id = instansiId.substring(0,4);
+		InstansiModel instansi = instansiService.getInstansiById(Long.parseLong(id));
+	    //System.out.println(instansi.getNama());
+	    return instansi;
+	}
 }

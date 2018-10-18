@@ -29,12 +29,9 @@ public class PegawaiServiceImpl implements PegawaiService {
 				gajiTerbesar = jabatan.getGajiPokok();
 			}
 		}
-		System.out.println("Pokok: " + gajiTerbesar);
 		gajiLengkap += gajiTerbesar;
 		double presentaseTunjangan = pegawai.getInstansi().getProvinsi().getPresentaseTunjangan();
-		System.out.println("Presentase: " + presentaseTunjangan);
 		gajiLengkap += (gajiLengkap * presentaseTunjangan/100);
-		System.out.println("Lengkap: " + gajiLengkap);
 		return gajiLengkap;
 	}
 

@@ -33,4 +33,15 @@ public class ProvinsiController {
 	    //model.addAttribute("listInstansi",provinsi.getInstansiList());
 	    return provinsi.getInstansiList(); 
 	}
+	
+	@RequestMapping(value = "/provinsi-get-update", method = RequestMethod.GET)
+	public @ResponseBody List<InstansiModel> findAllInstansi(@RequestParam(value = "provinsiId", required = true) long provinsiId, @RequestParam(value = "pegawaiNip", required = true) String pegawaiNip, Model model) {
+	    String nip = pegawaiNip.substring(0, 4);
+	    InstansiModel instansi = instansiService.getInstansiById(Long.parseLong(nip));
+		
+	    ProvinsiModel provinsi = provinsiService.getProvinsiDetailById(provinsiId);
+	    List<InstansiModel> instansiList = provinsi.getInstansiList();
+	    instansiList.add(instansi);
+	    return instansiList; 
+	}
 }

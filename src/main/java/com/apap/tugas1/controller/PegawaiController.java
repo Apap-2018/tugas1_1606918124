@@ -34,9 +34,7 @@ public class PegawaiController {
 	@RequestMapping(value = "/pegawai")
 	public String viewPegawai(@RequestParam("nip") String nip, Model model) {
 		PegawaiModel pegawai = pegawaiService.getPegawaiDetailByNip(nip);
-		for (JabatanModel jabatan:pegawai.getJabatanList()) {
-			System.out.println(jabatan.getNama());
-		}
+
 		model.addAttribute("pegawai", pegawai);
 		model.addAttribute("gajiLengkap", Math.round(pegawaiService.getGajiLengkapByNip(nip)));
 		model.addAttribute("jabatanList", pegawai.getJabatanList());
@@ -58,41 +56,78 @@ public class PegawaiController {
 	}
 
 	@RequestMapping(value = "/pegawai/tambah", method = RequestMethod.POST)
-	private String addPegwawaiSubmit(@ModelAttribute PegawaiModel pegawai) {
+	private String addPegwawaiSubmit(@ModelAttribute PegawaiModel pegawai, Model model) {
 		String nip = "";
-		System.out.println("");
-		System.out.println("Nama: " + pegawai.getNama());
-		System.out.println("Instansi: " + pegawai.getInstansi().getNama());
-
-		System.out.println(pegawai.getInstansi().getId());
+		
 		nip += pegawai.getInstansi().getId();
-
-		System.out.println(pegawai.getTanggalLahir());
+		
 		String[] tglLahir = pegawai.getTanggalLahir().toString().split("-");
 		String tglLahirString = tglLahir[2] + tglLahir[1] + tglLahir[0].substring(2, 4);
 		nip += tglLahirString;
 
-		System.out.println(pegawai.getTahunMasuk());
 		nip += pegawai.getTahunMasuk();
 
 		int counterSama = 1;
 		for (PegawaiModel pegawaiInstansi:pegawai.getInstansi().getPegawaiInstansi()) {
 			if (pegawaiInstansi.getTahunMasuk().equals(pegawai.getTahunMasuk()) && pegawaiInstansi.getTanggalLahir().equals(pegawai.getTanggalLahir())) {
 				counterSama += 1;
-				if (counterSama > 10) {
-					break;
-				}
 			}	
 		}
 		nip += "0" + counterSama;
 
-		System.out.println("NIP: " + nip);
 		for (JabatanModel jabatan:pegawai.getJabatanList()) {
 			System.out.println(jabatan.getNama());
 		}
 		pegawai.setNip(nip);
 		pegawaiService.addPegawai(pegawai);
-		return "index";
+		model.addAttribute("pegawai", pegawai);
+		return "sukses-add-pegawai";
 	}
+	
+	@RequestMapping(value = "/pegawai/ubah")
+	public String changePegawai(@RequestParam("nip") String nip, Model model) {
+		PegawaiModel pegawai = pegawaiService.getPegawaiDetailByNip(nip);
+		//System.out.println(pegawai.getId());
+		
+		model.addAttribute("listProvinsi", provinsiService.getProvinsiList());
+		model.addAttribute("listJabatan", jabatanService.findAllJabatan());
+		model.addAttribute("pegawai", pegawai);
+		return "change-pegawai";	
+	}	
+	
+	@RequestMapping(value = "/pegawai/ubah", method = RequestMethod.POST)
+	private String ubahPegawaiSubmit(@ModelAttribute PegawaiModel pegawai, Model model) {
+		String nip = "";
+		
+		nip += pegawai.getInstansi().getId();
+		//System.out.println(pegawai.getInstansi().getId());
+		//System.out.println(pegawai.getId());
+		
+		String[] tglLahir = pegawai.getTanggalLahir().toString().split("-");
+		String tglLahirString = tglLahir[2] + tglLahir[1] + tglLahir[0].substring(2, 4);
+		nip += tglLahirString;
+		//System.out.println(pegawai.getTanggalLahir());
+		
+		nip += pegawai.getTahunMasuk();
+		//System.out.println(pegawai.getTahunMasuk());
+		
+		int counterSama = 1;
+		for (PegawaiModel pegawaiInstansi:pegawai.getInstansi().getPegawaiInstansi()) {
+			if (pegawaiInstansi.getTahunMasuk().equals(pegawai.getTahunMasuk()) && pegawaiInstansi.getTanggalLahir().equals(pegawai.getTanggalLahir()) && pegawaiInstansi.getId() != pegawai.getId()) {
+				counterSama += 1;
+			}	
+		}
+		nip += "0" + counterSama;
 
+		for (JabatanModel jabatan:pegawai.getJabatanList()) {
+			System.out.println(jabatan.getNama());
+		}
+		pegawai.setNip(nip);
+		//System.out.println(pegawai.getNip());
+		//System.out.println(pegawai.getId());
+		pegawaiService.addPegawai(pegawai);
+		model.addAttribute("pegawai", pegawai);
+		return "sukses-change-pegawai";
+	}
+	
 }
