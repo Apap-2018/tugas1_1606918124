@@ -47,13 +47,13 @@
 		
 		Jabatan: <br>
 
-		<table>
+		<table border="1">
 			<tr th:each="jabatan,iterationStatus : ${listJabatan}">
 				<td th:text="${iterationStatus.count}"></td>
 				<td th:text="${jabatan.nama}"></td>
 				<td><input type="checkbox" th:field="*{jabatanList}"
 					th:value="${jabatan.id}" /> <label
-					th:for="${#ids.prev('jabatanList')}">Hapus</label></td>
+					th:for="${#ids.prev('jabatanList')}"></label></td>
 			</tr>
 		</table>
 

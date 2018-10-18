@@ -38,6 +38,11 @@ public class PegawaiServiceImpl implements PegawaiService {
 		return gajiLengkap;
 	}
 
+	@Override
+	public void addPegawai(PegawaiModel pegawai) {
+		pegawaiDB.save(pegawai);
+	}
+
 	//@Override
 	//public long countEntity() {
 		//return pegawaiDB.count();

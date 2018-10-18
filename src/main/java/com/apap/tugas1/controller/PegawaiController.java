@@ -90,6 +90,8 @@ public class PegawaiController {
 		for (JabatanModel jabatan:pegawai.getJabatanList()) {
 			System.out.println(jabatan.getNama());
 		}
+		pegawai.setNip(nip);
+		pegawaiService.addPegawai(pegawai);
 		return "index";
 	}
 
