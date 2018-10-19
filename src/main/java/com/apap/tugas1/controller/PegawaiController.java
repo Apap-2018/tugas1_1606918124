@@ -1,5 +1,7 @@
 package com.apap.tugas1.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -154,5 +156,13 @@ public class PegawaiController {
 		
 		return "view-instansi";
 	}	
+	
+	@RequestMapping(value = "/pegawai/cari")
+	public String viewPegawaiFilter(Model model) {
+		List<PegawaiModel> listPegawai = pegawaiService.getAllPegawai();
+		System.out.println(listPegawai.size());
+		model.addAttribute("listPegawai", listPegawai);
+		return "view-pegawai-filter";
+	}
 	
 }

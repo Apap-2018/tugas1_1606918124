@@ -82,6 +82,11 @@ public class PegawaiServiceImpl implements PegawaiService {
 		return pegawaiTertua;
 	}
 
+	@Override
+	public List<PegawaiModel> getAllPegawai() {
+		return pegawaiDB.findAll();
+	}
+
 	//@Override
 	//public long countEntity() {
 	//return pegawaiDB.count();
