@@ -65,7 +65,6 @@ public class JabatanController {
 		return "sukses-change-jabatan";
 	}
 	
-	//Error
 	@RequestMapping(value = "/jabatan/hapus", method = RequestMethod.POST)
 	public String hapusJabatanSubmit(@ModelAttribute JabatanModel jabatan, Model model) {
 		JabatanModel jabatanDelete = jabatanService.getJabatanDetailById(jabatan.getId());
@@ -77,5 +76,11 @@ public class JabatanController {
 			jabatanService.deleteJabatan(jabatanDelete);
 			return "sukses-delete-jabatan";
 		}
+	}
+	
+	@RequestMapping(value = "/jabatan/viewall", method = RequestMethod.GET)
+	public String viewAllJabatan(Model model) {
+		model.addAttribute("listJabatan", jabatanService.findAllJabatan());
+		return "view-all-jabatan";
 	}
 }
