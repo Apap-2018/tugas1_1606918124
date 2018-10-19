@@ -2,29 +2,37 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>Tambah Pegawai</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
-	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+<title>Tambah Jabatan</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+<object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 
 <body>
 	<nav th:replace="fragments/fragment :: navbar"></nav>
 	<br>
-	<form th:action="@{/jabatan/tambah}" th:object="${jabatan}" method="POST">
-		<h3>Tambah Jabatan</h3>
-		Nama: <br>
-		<input type="text" name="nama" />
-		<br>
-		Deskripsi: <br>
-		<input type="text" name="deskripsi" /> 	
-		<br>
-		Gaji Pokok: <br>
-		<input type="number" name="gajiPokok" />
-		<br>
-		
-		<button type="submit" class="btn btn-primary">Simpan</button>
-	</form>
-</body>	
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<h4>Tambah Jabatan</h4>
+					</div>
+					<div class="card-body">
+						<form th:action="@{/jabatan/tambah}" th:object="${jabatan}"
+							method="POST">
+							Nama: <br> <input type="text" name="nama" /> <br>
+							Deskripsi: <br> <input type="text" name="deskripsi" /> <br>
+							Gaji Pokok: <br> <input type="number" name="gajiPokok" />
+							<p></p>
+							<button type="submit" class="btn btn-primary">Simpan</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
 
 </html>

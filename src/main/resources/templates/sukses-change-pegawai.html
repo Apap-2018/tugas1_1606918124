@@ -11,6 +11,8 @@
 <body>
 	<nav th:replace="fragments/fragment :: navbar"></nav>
 	<br>
-	<h2>Sukses!</h2>
-	<h4 th:text="'Pegawai dengan NIP ' + ${pegawai.nip} + ' berhasil diubah'"></h4>
+	<div class="container-fluid">
+		<h4>Sukses!</h4>
+		<p th:text="'Pegawai dengan NIP ' + ${pegawai.nip} + ' berhasil diubah'"></p>
+	</div>
 </html>

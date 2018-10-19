@@ -76,8 +76,7 @@ public class JabatanController {
 	public String viewAllJabatan(Model model) {
 		List<JabatanModel> listJabatan = jabatanService.findAllJabatan();
 		for (JabatanModel jabatan:listJabatan) {
-			jabatan.setSizePegawai(jabatan.jabatanSize());
-			System.out.println(jabatan.getJumlahPegawai());
+			jabatan.setJumlahPegawai(jabatan.jabatanSize());
 		}
 		model.addAttribute("listJabatan", listJabatan);
 		return "view-all-jabatan";

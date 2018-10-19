@@ -1,29 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<title>View Pegawai</title>
-		<object th:include="fragments/fragment :: css" th:remove="tag"></object>
-		<object th:include="fragments/fragment :: js" th:remove="tag"></object>
-	</head>
-	<body>
-		<nav th:replace="fragments/fragment :: navbar"></nav>
-		<br>
-		<h2 th:text="'Lihat Data Pegawai - ' + ${pegawai.nip}"></h2>
-		<br>
-		<h4 th:text="'NIP : ' + ${pegawai.nip}"></h4>
-		<h4 th:text="'Nama : ' + ${pegawai.nama}"></h4>
-		<h4 th:text="'Tempat Lahir : ' + ${pegawai.tempatLahir}"></h4>
-		<h4 th:text="'Tanggal Lahir : ' + ${pegawai.tanggalLahir}"></h4>
-		<h4 th:text="'Tahun Masuk : ' + ${pegawai.tahunMasuk}"></h4>
-		<h4 th:text="'Nama Instansi : ' + ${pegawai.instansi.nama} + ' - ' + ${pegawai.instansi.provinsi.nama}"></h4>
-		<h4 th:text="'Jabatan : '"></h4>
-		<ul th:each="jabatan : ${jabatanList}">
-			<li><h4 th:text="${jabatan.nama}"></h4></li>
-		</ul>
-		<h4 th:text="'Gaji : Rp' + ${gajiLengkap}"></h4>
-		<form th:action="@{/pegawai/ubah}" method="GET">
-			<input type="hidden" th:field="*{pegawai.nip}"></input>
-			<button type="submit" class="btn btn-primary">Ubah</button>
-		</form>
-	</body>
+<head>
+<title>View Pegawai</title>
+<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+	<nav th:replace="fragments/fragment :: navbar"></nav>
+	<br>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<h4 th:text="'Lihat Data Pegawai - ' + ${pegawai.nip}"></h4>
+					</div>
+					<div class="card-body">
+						<p th:text="'NIP : ' + ${pegawai.nip}"></p>
+						<p th:text="'Nama : ' + ${pegawai.nama}"></p>
+						<p th:text="'Tempat Lahir : ' + ${pegawai.tempatLahir}"></p>
+						<p th:text="'Tanggal Lahir : ' + ${pegawai.tanggalLahir}"></p>
+						<p th:text="'Tahun Masuk : ' + ${pegawai.tahunMasuk}"></p>
+						<p
+							th:text="'Nama Instansi : ' + ${pegawai.instansi.nama} + ' - ' + ${pegawai.instansi.provinsi.nama}"></p>
+						<p th:text="'Jabatan : '"></p>
+						<ul th:each="jabatan : ${jabatanList}">
+							<li><p th:text="${jabatan.nama}"></p></li>
+						</ul>
+						<p th:text="'Gaji : Rp' + ${gajiLengkap}"></p>
+						<form th:action="@{/pegawai/ubah}" method="GET">
+							<input type="hidden" th:field="*{pegawai.nip}"></input>
+							<button type="submit" class="btn btn-primary">Ubah</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
 </html>

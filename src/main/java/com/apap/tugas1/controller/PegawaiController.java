@@ -83,10 +83,7 @@ public class PegawaiController {
 			}	
 		}
 		nip += "0" + counterSama;
-
-		for (JabatanModel jabatan:pegawai.getJabatanList()) {
-			System.out.println(jabatan.getNama());
-		}
+		
 		pegawai.setNip(nip);
 		pegawaiService.addPegawai(pegawai);
 		model.addAttribute("pegawai", pegawai);
@@ -128,9 +125,6 @@ public class PegawaiController {
 		}
 		nip += "0" + counterSama;
 
-		for (JabatanModel jabatan:pegawai.getJabatanList()) {
-			System.out.println(jabatan.getNama());
-		}
 		pegawai.setNip(nip);
 		//System.out.println(pegawai.getNip());
 		//System.out.println(pegawai.getId());
@@ -142,8 +136,6 @@ public class PegawaiController {
 	@RequestMapping(value = "/pegawai/termuda-tertua")
 	public String viewPegawaiUmur(@RequestParam("idInstansi") long idInstansi, Model model) {
 		PegawaiModel pegawaiTermuda = pegawaiService.findPegawaiTermuda(idInstansi);
-		System.out.println(pegawaiTermuda.getId());
-		System.out.println(pegawaiTermuda.getInstansi().getNama());
 		PegawaiModel pegawaiTertua = pegawaiService.findPegawaiTertua(idInstansi);
 		
 		model.addAttribute("pegawaiTermuda", pegawaiTermuda);
@@ -160,7 +152,6 @@ public class PegawaiController {
 	@RequestMapping(value = "/pegawai/cari")
 	public String viewPegawaiFilter(Model model) {
 		List<PegawaiModel> listPegawai = pegawaiService.getAllPegawai();
-		System.out.println(listPegawai.size());
 		model.addAttribute("listPegawai", listPegawai);
 		return "view-pegawai-filter";
 	}
