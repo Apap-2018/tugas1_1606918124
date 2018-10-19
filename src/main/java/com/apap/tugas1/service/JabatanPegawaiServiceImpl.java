@@ -30,4 +30,13 @@ public class JabatanPegawaiServiceImpl implements JabatanPegawaiService {
 		return jabatanPegawaiDB.getOne(id);
 	}
 
+	@Override
+	public boolean isExistByJabatanId(long id) {
+		boolean isExist = false;
+		for (JabatanPegawaiModel jabatanPegawai:jabatanPegawaiDB.findAll()) {
+			//if (jabatanPegawai.g)
+		}
+		return isExist;
+	}
+
 }

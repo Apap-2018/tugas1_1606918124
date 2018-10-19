@@ -14,12 +14,12 @@
 		<h4 th:text="'Gaji Pokok : ' + ${jabatan.gajiPokok}"></h4>
 		
 		<form th:action="@{/jabatan/ubah}" method="GET">
-			<input type="hidden" th:field="*{jabatan.id}"></input>
+			<input type="hidden" name="idJabatan" th:value="${jabatan.id}"></input>
 			<button type="submit" class="btn btn-primary">Ubah</button>
 		</form>
 		
-		<form th:action="@{/jabatan/hapus}" method="GET">
-			<input type="hidden" th:field="*{jabatan.id}"></input>
+		<form th:action="@{/jabatan/hapus}" th:object="${jabatan}" method="POST">
+			<input type="hidden" th:value="${jabatan.id}" th:field="*{id}" />
 			<button type="submit" class="btn btn-primary">Hapus</button>
 		</form>
 	</body>

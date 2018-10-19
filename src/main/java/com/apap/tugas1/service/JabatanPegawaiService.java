@@ -8,4 +8,5 @@ public interface JabatanPegawaiService {
 	List<JabatanPegawaiModel> getJabatanByPegawaiId(long id);
 	long sizeJabatanPegawai();
 	JabatanPegawaiModel checkWho(long id);
+	boolean isExistByJabatanId(long id);
 }

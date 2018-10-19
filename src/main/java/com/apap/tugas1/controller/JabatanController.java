@@ -48,4 +48,34 @@ public class JabatanController {
 		model.addAttribute("jabatan", jabatan);
 		return "view-jabatan";
 	}
+	
+	@RequestMapping(value = "/jabatan/ubah", method = RequestMethod.GET)
+	public String ubahJabatan(@RequestParam("idJabatan") long idJabatan, Model model) {
+		JabatanModel jabatan = jabatanService.getJabatanDetailById(idJabatan);
+		
+		model.addAttribute("jabatan", jabatan);
+		return "change-jabatan";
+	}
+	
+	@RequestMapping(value = "/jabatan/ubah", method = RequestMethod.POST)
+	public String ubahJabatanSubmit(@ModelAttribute JabatanModel jabatan, Model model) {
+		
+		jabatanService.addJabatan(jabatan);
+		model.addAttribute("jabatan", jabatan);
+		return "sukses-change-jabatan";
+	}
+	
+	//Error
+	@RequestMapping(value = "/jabatan/hapus", method = RequestMethod.POST)
+	public String hapusJabatanSubmit(@ModelAttribute JabatanModel jabatan, Model model) {
+		JabatanModel jabatanDelete = jabatanService.getJabatanDetailById(jabatan.getId());
+		model.addAttribute("jabatan", jabatanDelete);
+		if (jabatanDelete.getPegawaiList().size() != 0) {
+			return "gagal-delete-jabatan";
+		}
+		else {
+			jabatanService.deleteJabatan(jabatanDelete);
+			return "sukses-delete-jabatan";
+		}
+	}
 }
