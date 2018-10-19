@@ -1,5 +1,7 @@
 package com.apap.tugas1.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,14 +42,39 @@ public class PegawaiServiceImpl implements PegawaiService {
 		pegawaiDB.save(pegawai);
 	}
 
+	@Override
+	public PegawaiModel findPegawaiTermuda(long idInstansi) {
+		PegawaiModel pegawaiTermuda = new PegawaiModel();
+		int counter = 0;
+		for (PegawaiModel pegawai:pegawaiDB.findAll()) {
+			if (pegawai.getInstansi().getId() == idInstansi) {
+				if (counter == 0) {
+					pegawaiTermuda = pegawai;
+					counter += 1;
+				}
+				else {
+					if (pegawai.getTanggalLahir().compareTo(pegawaiTermuda.getTanggalLahir()) > 0) {
+						pegawaiTermuda = pegawai;
+					}
+				}
+			}
+		}
+		return pegawaiTermuda;
+	}
+
+	@Override
+	public PegawaiModel findPegawaiTertua(long idInstansi) {
+		return null;
+	}
+
 	//@Override
 	//public long countEntity() {
-		//return pegawaiDB.count();
+	//return pegawaiDB.count();
 	//}
 
 	//@Override
 	//public PegawaiModel getPegawaiDetailById(Long id) {
-		//return pegawaiDB.getOne(id);
+	//return pegawaiDB.getOne(id);
 	//}
-	
+
 }

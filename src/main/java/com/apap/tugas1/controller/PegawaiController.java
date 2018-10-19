@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.apap.tugas1.model.InstansiModel;
 import com.apap.tugas1.model.JabatanModel;
 import com.apap.tugas1.model.PegawaiModel;
+import com.apap.tugas1.service.InstansiService;
 import com.apap.tugas1.service.JabatanService;
 import com.apap.tugas1.service.PegawaiService;
 import com.apap.tugas1.service.ProvinsiService;
@@ -26,10 +27,14 @@ public class PegawaiController {
 	
 	@Autowired 
 	private JabatanService jabatanService;
+	
+	@Autowired
+	private InstansiService instansiService;
 
 	@RequestMapping("/")
 	private String index(Model model) {
 		model.addAttribute("listJabatan",jabatanService.findAllJabatan());
+		model.addAttribute("listInstansi",instansiService.findAllInstansi());
 		return "index";
 	}
 
@@ -131,5 +136,13 @@ public class PegawaiController {
 		model.addAttribute("pegawai", pegawai);
 		return "sukses-change-pegawai";
 	}
+	
+	@RequestMapping(value = "/pegawai/termuda-tertua")
+	public String viewPegawaiUmur(@RequestParam("idInstansi") long idInstansi, Model model) {
+		PegawaiModel pegawaiTermuda = pegawaiService.findPegawaiTermuda(idInstansi);
+		//PegawaiModel pegawaiTertua = pegawaiService.findPegawaiTertua(idInstansi);
+		System.out.println(pegawaiTermuda.getNama());
+		return "view-instansi";
+	}	
 	
 }

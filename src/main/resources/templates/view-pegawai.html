@@ -16,9 +16,9 @@
 		<h4 th:text="'Tahun Masuk : ' + ${pegawai.tahunMasuk}"></h4>
 		<h4 th:text="'Nama Instansi : ' + ${pegawai.instansi.nama} + ' - ' + ${pegawai.instansi.provinsi.nama}"></h4>
 		<h4 th:text="'Jabatan : '"></h4>
-		<div th:each="jabatan : ${jabatanList}">
-			<h4 th:text="'- ' + ${jabatan.nama}"></h4>
-		</div>
+		<ul th:each="jabatan : ${jabatanList}">
+			<li><h4 th:text="${jabatan.nama}"></h4></li>
+		</ul>
 		<h4 th:text="'Gaji : Rp' + ${gajiLengkap}"></h4>
 		<form th:action="@{/pegawai/ubah}" method="GET">
 			<input type="hidden" th:field="*{pegawai.nip}"></input>

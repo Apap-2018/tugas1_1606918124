@@ -9,19 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.apap.tugas1.model.JabatanModel;
-import com.apap.tugas1.model.PegawaiModel;
 import com.apap.tugas1.service.JabatanService;
-import com.apap.tugas1.service.PegawaiService;
-import com.apap.tugas1.service.ProvinsiService;
 
 
 @Controller
 public class JabatanController {
-	@Autowired
-	private PegawaiService pegawaiService;
-
-	@Autowired
-	private ProvinsiService provinsiService;
 	
 	@Autowired 
 	private JabatanService jabatanService;
@@ -69,7 +61,7 @@ public class JabatanController {
 	public String hapusJabatanSubmit(@ModelAttribute JabatanModel jabatan, Model model) {
 		JabatanModel jabatanDelete = jabatanService.getJabatanDetailById(jabatan.getId());
 		model.addAttribute("jabatan", jabatanDelete);
-		if (jabatanDelete.getPegawaiList().size() != 0) {
+		if (jabatanDelete.jabatanSize() != 0) {
 			return "gagal-delete-jabatan";
 		}
 		else {
