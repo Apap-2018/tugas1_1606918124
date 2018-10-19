@@ -140,8 +140,18 @@ public class PegawaiController {
 	@RequestMapping(value = "/pegawai/termuda-tertua")
 	public String viewPegawaiUmur(@RequestParam("idInstansi") long idInstansi, Model model) {
 		PegawaiModel pegawaiTermuda = pegawaiService.findPegawaiTermuda(idInstansi);
-		//PegawaiModel pegawaiTertua = pegawaiService.findPegawaiTertua(idInstansi);
-		System.out.println(pegawaiTermuda.getNama());
+		System.out.println(pegawaiTermuda.getId());
+		System.out.println(pegawaiTermuda.getInstansi().getNama());
+		PegawaiModel pegawaiTertua = pegawaiService.findPegawaiTertua(idInstansi);
+		
+		model.addAttribute("pegawaiTermuda", pegawaiTermuda);
+		model.addAttribute("gajiLengkapTermuda", Math.round(pegawaiService.getGajiLengkapByNip(pegawaiTermuda.getNip())));
+		model.addAttribute("jabatanListTermuda", pegawaiTermuda.getJabatanList());
+		
+		model.addAttribute("pegawaiTertua", pegawaiTertua);
+		model.addAttribute("gajiLengkapTertua", Math.round(pegawaiService.getGajiLengkapByNip(pegawaiTertua.getNip())));
+		model.addAttribute("jabatanListTertua", pegawaiTertua.getJabatanList());
+		
 		return "view-instansi";
 	}	
 	

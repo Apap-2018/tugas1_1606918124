@@ -64,7 +64,22 @@ public class PegawaiServiceImpl implements PegawaiService {
 
 	@Override
 	public PegawaiModel findPegawaiTertua(long idInstansi) {
-		return null;
+		PegawaiModel pegawaiTertua = new PegawaiModel();
+		int counter = 0;
+		for (PegawaiModel pegawai:pegawaiDB.findAll()) {
+			if (pegawai.getInstansi().getId() == idInstansi) {
+				if (counter == 0) {
+					pegawaiTertua = pegawai;
+					counter += 1;
+				}
+				else {
+					if (pegawai.getTanggalLahir().compareTo(pegawaiTertua.getTanggalLahir()) < 0) {
+						pegawaiTertua = pegawai;
+					}
+				}
+			}
+		}
+		return pegawaiTertua;
 	}
 
 	//@Override

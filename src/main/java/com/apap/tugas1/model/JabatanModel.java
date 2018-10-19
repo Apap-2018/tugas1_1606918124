@@ -18,6 +18,16 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "jabatan")
 public class JabatanModel implements Serializable {
+	private int jumlahPegawai;
+	
+	public int getJumlahPegawai() {
+		return jumlahPegawai;
+	}
+
+	public void setSizePegawai(int jumlahPegawai) {
+		this.jumlahPegawai = jumlahPegawai;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;

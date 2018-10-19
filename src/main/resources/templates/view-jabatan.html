@@ -8,19 +8,21 @@
 	<body>
 		<nav th:replace="fragments/fragment :: navbar"></nav>
 		<br>
-		<h2 th:text="'Detail Jabatan ' + ${jabatan.nama}"></h2>
+		<h2 th:text="'Detail Jabatan'"></h2>
 		<h4 th:text="'Nama : ' + ${jabatan.nama}"></h4>
 		<h4 th:text="'Deskripsi : ' + ${jabatan.deskripsi}"></h4>
 		<h4 th:text="'Gaji Pokok : ' + ${jabatan.gajiPokok}"></h4>
-		
-		<form th:action="@{/jabatan/ubah}" method="GET">
+		<table>
+		<tr>
+		<td><form th:action="@{/jabatan/ubah}" method="GET">
 			<input type="hidden" name="idJabatan" th:value="${jabatan.id}"></input>
 			<button type="submit" class="btn btn-primary">Ubah</button>
-		</form>
-		
-		<form th:action="@{/jabatan/hapus}" th:object="${jabatan}" method="POST">
+		</form></td>
+		<td><form th:action="@{/jabatan/hapus}" th:object="${jabatan}" method="POST">
 			<input type="hidden" th:value="${jabatan.id}" th:field="*{id}" />
 			<button type="submit" class="btn btn-primary">Hapus</button>
-		</form>
+		</form></td>
+		</tr>
+		</table>
 	</body>
 </html>
