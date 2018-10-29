@@ -2,8 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>400 Error</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
-	<h2 align="center">Error, isikan parameter dengan benar</h2>
+	<nav th:replace="fragments/fragment :: navbar"></nav>
+	<br>
+	<div class="container-fluid">
+	<div class="alert alert-danger">
+	<h4>Error!</h4>
+	<p>Isikan parameter dengan benar.</p>
+	</div>
+	</div>
 </body>
 </html>

@@ -12,7 +12,9 @@
 	<nav th:replace="fragments/fragment :: navbar"></nav>
 	<br>
 	<div class="container-fluid">
+		<div class="alert alert-success">
 		<h4>Sukses!</h4>
 		<p th:text="'Pegawai dengan NIP ' + ${pegawai.nip} + ' berhasil diubah'"></p>
+		</div>
 	</div>
 </html>

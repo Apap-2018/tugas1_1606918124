@@ -1,5 +1,6 @@
 package com.apap.tugas1.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.apap.tugas1.model.InstansiModel;
 import com.apap.tugas1.model.JabatanModel;
 import com.apap.tugas1.model.PegawaiModel;
+import com.apap.tugas1.model.ProvinsiModel;
 import com.apap.tugas1.service.InstansiService;
 import com.apap.tugas1.service.JabatanService;
 import com.apap.tugas1.service.PegawaiService;
@@ -151,8 +153,48 @@ public class PegawaiController {
 	
 	@RequestMapping(value = "/pegawai/cari")
 	public String viewPegawaiFilter(Model model) {
-		List<PegawaiModel> listPegawai = pegawaiService.getAllPegawai();
-		model.addAttribute("listPegawai", listPegawai);
+		List<ProvinsiModel> listProvinsi = provinsiService.getProvinsiList();
+		model.addAttribute("listProvinsi", listProvinsi);
+		
+		List<JabatanModel> listJabatan = jabatanService.findAllJabatan();
+		model.addAttribute("listJabatan", listJabatan);
+		
+		InstansiModel instansi = new InstansiModel();
+		model.addAttribute("instansi", instansi);
+		
+		return "view-pegawai-filter";
+	}
+	
+	@RequestMapping(value = "/pegawai/cari",  params = {"idProvinsi", "idInstansi", "idJabatan"})
+	private String viewPegawaiFilterFix(@RequestParam(value = "idProvinsi") long idProvinsi,
+							   		 @RequestParam(value = "idInstansi") long idInstansi,
+							   		 @RequestParam(value = "idJabatan") long idJabatan,
+							   		 Model model) {
+		InstansiModel instansiTemp = instansiService.getInstansiById(idInstansi);
+		JabatanModel jabatan = jabatanService.getJabatanDetailById(idJabatan);
+		List<PegawaiModel> listPegawai = instansiTemp.getPegawaiInstansi();
+		List<PegawaiModel> listPegawaiFix = new ArrayList<>();
+		for (PegawaiModel pegawai : listPegawai) {
+			for (JabatanModel jabatanPegawai : pegawai.getJabatanList()) {
+				if (jabatanPegawai.equals(jabatan)) {
+					listPegawaiFix.add(pegawai);
+				}
+			}
+		}
+		
+		model.addAttribute("listPegawaiFix", listPegawaiFix);
+		model.addAttribute("namaInstansi", instansiTemp.getNama());
+		model.addAttribute("namaJabatan", jabatan.getNama());
+		
+		List<ProvinsiModel> listProvinsi = provinsiService.getProvinsiList();
+		model.addAttribute("listProvinsi", listProvinsi);
+		
+		List<JabatanModel> listJabatan = jabatanService.findAllJabatan();
+		model.addAttribute("listJabatan", listJabatan);
+		
+		InstansiModel instansi = new InstansiModel();
+		model.addAttribute("instansi", instansi);
+		
 		return "view-pegawai-filter";
 	}
 	
