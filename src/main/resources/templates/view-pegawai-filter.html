@@ -26,7 +26,7 @@
 					<div class="card-body">
 						<form th:action="@{/pegawai/cari}">
 							<div class="form-group">
-								<label>Provinsi:</label> <select class="form-control"
+								<label>Provinsi*:</label> <select class="form-control"
 									name="idProvinsi" id="provinsi">
 									<option disabled="disabled" selected="selected">--
 										Pilih Provinsi --</option>
@@ -35,7 +35,7 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label>Instansi:</label> <select class="form-control"
+								<label>Instansi*:</label> <select class="form-control"
 									name="idInstansi" id="instansi" th:value="${instansi}"
 									required="required">
 									<option disabled="disabled" selected="selected">--
@@ -43,7 +43,7 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label>Jabatan:</label> <select class="form-control"
+								<label>Jabatan*:</label> <select class="form-control"
 									name="idJabatan" id="jabatan">
 									<option disabled="disabled" selected="selected">--
 										Pilih Jabatan --</option>
@@ -51,6 +51,7 @@
 										th:value="${jabatan.id}" th:text="${jabatan.nama}"></option>
 								</select>
 							</div>
+							<p>*required</p>
 							<button type="submit" class="btn btn-primary">Cari</button>
 							<br>
 						</form>
@@ -79,14 +80,18 @@
 									<td></td>
 								</tr>
 
-								<tr th:each="pegawai: ${listPegawaiFix}">
-									<td th:text="${pegawai.nip}"></td>
+								<tr th:each="pegawai : ${listPegawaiFix}">
+									<td th:text="${pegawai.nip}" ></td>
 									<td th:text="${pegawai.nama}"></td>
 									<td th:text="${pegawai.tempatLahir}"></td>
 									<td th:text="${pegawai.tanggalLahir}"></td>
 									<td th:text="${pegawai.tahunMasuk}"></td>
-									<td th:text="${namaInstansi}"></td>
-									<td th:text="${namaJabatan}"></td>
+									<td th:text="${pegawai.instansi.nama}"></td>
+									<td> 
+										<div th:each="jabatan : ${pegawai.jabatanList}">
+										<p th:text="${jabatan.nama}"></p>
+										</div>
+									</td>
 								</tr>
 
 							</tbody>

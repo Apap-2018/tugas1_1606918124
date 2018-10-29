@@ -170,8 +170,10 @@ public class PegawaiController {
 							   		 @RequestParam(value = "idInstansi") long idInstansi,
 							   		 @RequestParam(value = "idJabatan") long idJabatan,
 							   		 Model model) {
+		
 		InstansiModel instansiTemp = instansiService.getInstansiById(idInstansi);
 		JabatanModel jabatan = jabatanService.getJabatanDetailById(idJabatan);
+		
 		List<PegawaiModel> listPegawai = instansiTemp.getPegawaiInstansi();
 		List<PegawaiModel> listPegawaiFix = new ArrayList<>();
 		for (PegawaiModel pegawai : listPegawai) {
@@ -183,8 +185,6 @@ public class PegawaiController {
 		}
 		
 		model.addAttribute("listPegawaiFix", listPegawaiFix);
-		model.addAttribute("namaInstansi", instansiTemp.getNama());
-		model.addAttribute("namaJabatan", jabatan.getNama());
 		
 		List<ProvinsiModel> listProvinsi = provinsiService.getProvinsiList();
 		model.addAttribute("listProvinsi", listProvinsi);
